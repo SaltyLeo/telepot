@@ -2,7 +2,7 @@
 
 ## The original owner is no longer maintaining this library.
 
-This forks provides additional features that are missing in the last telepot update.
+This fork provides additional features that are missing in the last telepot update.
 
 - Bot API Methods: sendAnimation, sendDice
 - Content types: dice, poll
