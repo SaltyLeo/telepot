@@ -1120,8 +1120,6 @@ class Bot(_BotBase):
         """
         f = self.getFile(file_id)
         try:
-            d = dest if _isfile(dest) else open(dest, 'wb')
-
             r = api.download((self._token, f['file_path']), preload_content=False)
             data = r.read()
         finally:
