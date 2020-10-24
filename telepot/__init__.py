@@ -586,6 +586,20 @@ class Bot(_BotBase):
         """
         p = _strip(locals(), more=['video'])
         return self._api_request_with_file('sendVideo', _rectify(p), 'video', video)
+    
+    def sendAnimation(self, chat_id, animation,
+                     caption=None,
+                     pasrse_mode=None,
+                     disable_notification=None,
+                     reply_to_message_id=None,
+                     reply_markup=None):
+        """
+        See: https://core.telegram.org/bots/api#sendanimation
+
+        :param animation: Same as ``photo`` in :meth:`telepot.Bot.sendPhoto`
+        """
+        p = _strip(locals(), more=['animation'])
+        return self._api_request_with_file('sendAnimation', _rectify(p), 'animation', voice)
 
     def sendVoice(self, chat_id, voice,
                   caption=None,
@@ -620,6 +634,19 @@ class Bot(_BotBase):
         """
         p = _strip(locals(), more=['video_note'])
         return self._api_request_with_file('sendVideoNote', _rectify(p), 'video_note', video_note)
+    
+    def sendDice(self, chat_id,
+                emoji=None,
+                disable_notification=None,
+                reply_to_message_id=None,
+                reply_markup=None):
+        """
+        See: https://core.telegram.org/bots/api#senddice
+
+        :param emoji: Emoji on which the dice throw animation is based
+        """
+        p = _strip(locals())
+        return self._api_request_with_file('sendDice', _rectify(p))
 
     def sendMediaGroup(self, chat_id, media,
                        disable_notification=None,
