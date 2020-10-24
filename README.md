@@ -1,6 +1,12 @@
 # telepot - Python framework for Telegram Bot API
 
-## I am no longer maintaining this library. Thanks for considering telepot.
+## The original owner is no longer maintaining this library.
+
+This forks provides additional features that are missing in the last telepot update.
+
+- Bot API Methods: sendAnimation, sendDice
+- Content types: dice, poll
+
 
 ### [Introduction »](http://telepot.readthedocs.io/en/latest/)
 ### [Reference »](http://telepot.readthedocs.io/en/latest/reference.html)
