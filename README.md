@@ -4,8 +4,8 @@
 
 This fork provides additional features that are missing in the last telepot update.
 
-- Bot API Methods: sendAnimation, sendDice, setMyCommands, getMyCommands
-- Content types: dice, poll
+- New Bot API Methods: sendAnimation, sendDice, setChatAdministratorCustomTitle, setChatPermissions, setMyCommands, getMyCommands
+- New Content types: dice, poll
 
 
 ### [Introduction »](http://telepot.readthedocs.io/en/latest/)
