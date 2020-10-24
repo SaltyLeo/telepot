@@ -1113,6 +1113,22 @@ class Bot(_BotBase):
             if 'r' in locals():
                 r.release_conn()
 
+    def download_file_bytes(self, file_id):
+        """
+        Download a file and return its bytes.
+        The file won't be saved to disk.
+        """
+        f = self.getFile(file_id)
+        try:
+            d = dest if _isfile(dest) else open(dest, 'wb')
+
+            r = api.download((self._token, f['file_path']), preload_content=False)
+            data = r.read()
+        finally:
+            if 'r' in locals():
+                r.release_conn()
+        return data
+
     def message_loop(self, callback=None, relax=0.1,
                      timeout=20, allowed_updates=None,
                      source=None, ordered=True, maxhold=3,
