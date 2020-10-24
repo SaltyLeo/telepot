@@ -896,6 +896,15 @@ class Bot(_BotBase):
         """ See: https://core.telegram.org/bots/api#answerprecheckoutquery """
         p = _strip(locals())
         return self._api_request('answerPreCheckoutQuery', _rectify(p))
+    
+    def setMyCommands(self, commands):
+        """ See: https://core.telegram.org/bots/api#setmycommands """
+        p = _strip(locals(), more=['commands'])
+        return self._api_request('setMyCommands', _rectify(p))
+    
+    def getMyCommands(self):
+        """ See: https://core.telegram.org/bots/api#getmycommands """
+        return self._api_request('getMyCommands')
 
     def editMessageText(self, msg_identifier, text,
                         parse_mode=None,
