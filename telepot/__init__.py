@@ -803,6 +803,16 @@ class Bot(_BotBase):
         p = _strip(locals())
         return self._api_request('promoteChatMember', _rectify(p))
 
+    def setChatAdministratorCustomTitle(self, chat_id, user_id, custom_title):
+        """ See: https://core.telegram.org/bots/api#setchatadministratorcustomtitle """
+        p = _strip(locals())
+        return self._api_request('setChatAdministratorCustomTitle', _rectify(p))
+    
+    def setChatPermissions(self, chat_id, permissions):
+        """ See: https://core.telegram.org/bots/api#setchatpermissions """
+        p = _strip(locals())
+        return self._api_request('setChatPermissions', _rectify(p))
+    
     def exportChatInviteLink(self, chat_id):
         """ See: https://core.telegram.org/bots/api#exportchatinvitelink """
         p = _strip(locals())
@@ -899,7 +909,7 @@ class Bot(_BotBase):
     
     def setMyCommands(self, commands):
         """ See: https://core.telegram.org/bots/api#setmycommands """
-        p = _strip(locals(), more=['commands'])
+        p = _strip(locals())
         return self._api_request('setMyCommands', _rectify(p))
     
     def getMyCommands(self):
