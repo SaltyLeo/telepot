@@ -57,7 +57,9 @@ def apply_entities_as_markdown(text, entities):
                   'text_link':    lambda s,e: '['+s+']('+e['url']+')',
                   'text_mention': lambda s,e: '['+s+'](tg://user?id='+str(e['user']['id'])+')',
                   'code':         lambda s,e: '`'+s+'`',
-                  'pre':          lambda s,e: '```text\n'+s+'```'}
+                  'pre':          lambda s,e: '```text\n'+s+'```',
+                  'underline':    lambda s,e: '__'+s+'__',
+                  'strikethrough':lambda s,e: '~'+s+'~'}
 
     return _apply_entities(text, entities, escapes, formatters)
 
@@ -83,6 +85,8 @@ def apply_entities_as_html(text, entities):
                   'text_link':    lambda s,e: '<a href="'+e['url']+'">'+s+'</a>',
                   'text_mention': lambda s,e: '<a href="tg://user?id='+str(e['user']['id'])+'">'+s+'</a>',
                   'code':         lambda s,e: '<code>'+s+'</code>',
-                  'pre':          lambda s,e: '<pre>'+s+'</pre>'}
+                  'pre':          lambda s,e: '<pre>'+s+'</pre>',
+                  'underline':    lambda s,e: '<u>'+s+'</u>',
+                  'strikethrough':lambda s,e: '<s>'+s+'</s>'}
 
     return _apply_entities(text, entities, escapes, formatters)
