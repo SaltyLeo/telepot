@@ -174,6 +174,19 @@ class Bot(_BotBase):
         p = _strip(locals(), more=['video'])
         return await self._api_request_with_file('sendVideo', _rectify(p), 'video', video)
 
+    async def sendAnimation(self, chat_id, animation,
+                     caption=None,
+                     pasrse_mode=None,
+                     disable_notification=None,
+                     reply_to_message_id=None,
+                     reply_markup=None):
+        """
+        See: https://core.telegram.org/bots/api#sendanimation
+        :param animation: Same as ``photo`` in :meth:`telepot.Bot.sendPhoto`
+        """
+        p = _strip(locals(), more=['animation'])
+        return await self._api_request_with_file('sendAnimation', _rectify(p), 'animation', voice)
+
     async def sendVoice(self, chat_id, voice,
                         caption=None,
                         parse_mode=None,
@@ -207,6 +220,18 @@ class Bot(_BotBase):
         """
         p = _strip(locals(), more=['video_note'])
         return await self._api_request_with_file('sendVideoNote', _rectify(p), 'video_note', video_note)
+
+    async def sendDice(self, chat_id,
+                emoji=None,
+                disable_notification=None,
+                reply_to_message_id=None,
+                reply_markup=None):
+        """
+        See: https://core.telegram.org/bots/api#senddice
+        :param emoji: Emoji on which the dice throw animation is based
+        """
+        p = _strip(locals())
+        return await self._api_request_with_file('sendDice', _rectify(p))
 
     async def sendMediaGroup(self, chat_id, media,
                              disable_notification=None,
@@ -363,6 +388,16 @@ class Bot(_BotBase):
         p = _strip(locals())
         return await self._api_request('promoteChatMember', _rectify(p))
 
+    async def setChatAdministratorCustomTitle(self, chat_id, user_id, custom_title):
+        """ See: https://core.telegram.org/bots/api#setchatadministratorcustomtitle """
+        p = _strip(locals())
+        return await self._api_request('setChatAdministratorCustomTitle', _rectify(p))
+
+    async def setChatPermissions(self, chat_id, permissions):
+        """ See: https://core.telegram.org/bots/api#setchatpermissions """
+        p = _strip(locals())
+        return await self._api_request('setChatPermissions', _rectify(p))
+
     async def exportChatInviteLink(self, chat_id):
         """ See: https://core.telegram.org/bots/api#exportchatinvitelink """
         p = _strip(locals())
@@ -456,6 +491,15 @@ class Bot(_BotBase):
         """ See: https://core.telegram.org/bots/api#answerprecheckoutquery """
         p = _strip(locals())
         return await self._api_request('answerPreCheckoutQuery', _rectify(p))
+
+    async def setMyCommands(self, commands):
+        """ See: https://core.telegram.org/bots/api#setmycommands """
+        p = _strip(locals())
+        return await self._api_request('setMyCommands', _rectify(p))
+    
+    async def getMyCommands(self):
+        """ See: https://core.telegram.org/bots/api#getmycommands """
+        return await self._api_request('getMyCommands')
 
     async def editMessageText(self, msg_identifier, text,
                               parse_mode=None,
@@ -646,6 +690,20 @@ class Bot(_BotBase):
         finally:
             if not isinstance(dest, io.IOBase) and 'd' in locals():
                 d.close()
+
+    async def download_file_bytes(self, file_id):
+        """
+        Download a file and return its bytes.
+        The file won't be saved to disk.
+        """
+        f = await self.getFile(file_id)
+        try:
+            r = api.download((self._token, f['file_path']), preload_content=False)
+            data = await r.read()
+        finally:
+            if 'r' in locals():
+                r.release_conn()
+        return data
 
     async def message_loop(self, handler=None, relax=0.1,
                            timeout=20, allowed_updates=None,
