@@ -94,6 +94,7 @@ class Bot(_BotBase):
                           disable_web_page_preview=None,
                           disable_notification=None,
                           reply_to_message_id=None,
+                          allow_sending_without_reply=None,
                           reply_markup=None):
         """ See: https://core.telegram.org/bots/api#sendmessage """
         p = _strip(locals())
@@ -104,12 +105,24 @@ class Bot(_BotBase):
         """ See: https://core.telegram.org/bots/api#forwardmessage """
         p = _strip(locals())
         return await self._api_request('forwardMessage', _rectify(p))
+    
+    async def copyMessage(self, chat_id, from_chat_id, message_id,
+                    caption=None,
+                    parse_mode=None,
+                    disable_notification=None,
+                    reply_to_message_id=None,
+                    allow_sending_without_reply=None,
+                    reply_markup=None):
+        """ See: https://core.telegram.org/bots/api#copymessage """
+        p = _strip(locals())
+        return await self._api_request('copyMessage', _rectify(p))
 
     async def sendPhoto(self, chat_id, photo,
                         caption=None,
                         parse_mode=None,
                         disable_notification=None,
                         reply_to_message_id=None,
+                        allow_sending_without_reply=None,
                         reply_markup=None):
         """
         See: https://core.telegram.org/bots/api#sendphoto
@@ -133,6 +146,7 @@ class Bot(_BotBase):
                         title=None,
                         disable_notification=None,
                         reply_to_message_id=None,
+                        allow_sending_without_reply=None,
                         reply_markup=None):
         """
         See: https://core.telegram.org/bots/api#sendaudio
@@ -145,8 +159,11 @@ class Bot(_BotBase):
     async def sendDocument(self, chat_id, document,
                            caption=None,
                            parse_mode=None,
+                           caption_entities=None,
+                           disable_content_type_detection=None,
                            disable_notification=None,
                            reply_to_message_id=None,
+                           allow_sending_without_reply=None,
                            reply_markup=None):
         """
         See: https://core.telegram.org/bots/api#senddocument
@@ -162,9 +179,11 @@ class Bot(_BotBase):
                         height=None,
                         caption=None,
                         parse_mode=None,
+                        caption_entities=None,
                         supports_streaming=None,
                         disable_notification=None,
                         reply_to_message_id=None,
+                        allow_sending_without_reply=None,
                         reply_markup=None):
         """
         See: https://core.telegram.org/bots/api#sendvideo
@@ -176,9 +195,11 @@ class Bot(_BotBase):
 
     async def sendAnimation(self, chat_id, animation,
                      caption=None,
-                     pasrse_mode=None,
+                     parse_mode=None,
+                     caption_entities=None,
                      disable_notification=None,
                      reply_to_message_id=None,
+                     allow_sending_without_reply=None,
                      reply_markup=None):
         """
         See: https://core.telegram.org/bots/api#sendanimation
@@ -190,9 +211,11 @@ class Bot(_BotBase):
     async def sendVoice(self, chat_id, voice,
                         caption=None,
                         parse_mode=None,
+                        caption_entities=None,
                         duration=None,
                         disable_notification=None,
                         reply_to_message_id=None,
+                        allow_sending_without_reply=None,
                         reply_markup=None):
         """
         See: https://core.telegram.org/bots/api#sendvoice
@@ -207,6 +230,7 @@ class Bot(_BotBase):
                             length=None,
                             disable_notification=None,
                             reply_to_message_id=None,
+                            allow_sending_without_reply=None,
                             reply_markup=None):
         """
         See: https://core.telegram.org/bots/api#sendvideonote
@@ -225,6 +249,7 @@ class Bot(_BotBase):
                 emoji=None,
                 disable_notification=None,
                 reply_to_message_id=None,
+                allow_sending_without_reply=None,
                 reply_markup=None):
         """
         See: https://core.telegram.org/bots/api#senddice
@@ -235,7 +260,8 @@ class Bot(_BotBase):
 
     async def sendMediaGroup(self, chat_id, media,
                              disable_notification=None,
-                             reply_to_message_id=None):
+                             reply_to_message_id=None,
+                             allow_sending_without_reply=None):
         """
         See: https://core.telegram.org/bots/api#sendmediagroup
 
@@ -265,6 +291,7 @@ class Bot(_BotBase):
                            live_period=None,
                            disable_notification=None,
                            reply_to_message_id=None,
+                           allow_sending_without_reply=None,
                            reply_markup=None):
         """ See: https://core.telegram.org/bots/api#sendlocation """
         p = _strip(locals())
@@ -296,6 +323,7 @@ class Bot(_BotBase):
                         foursquare_id=None,
                         disable_notification=None,
                         reply_to_message_id=None,
+                        allow_sending_without_reply=None,
                         reply_markup=None):
         """ See: https://core.telegram.org/bots/api#sendvenue """
         p = _strip(locals())
@@ -305,6 +333,7 @@ class Bot(_BotBase):
                           last_name=None,
                           disable_notification=None,
                           reply_to_message_id=None,
+                          allow_sending_without_reply=None,
                           reply_markup=None):
         """ See: https://core.telegram.org/bots/api#sendcontact """
         p = _strip(locals())
@@ -313,6 +342,7 @@ class Bot(_BotBase):
     async def sendGame(self, chat_id, game_short_name,
                        disable_notification=None,
                        reply_to_message_id=None,
+                       allow_sending_without_reply=None,
                        reply_markup=None):
         """ See: https://core.telegram.org/bots/api#sendgame """
         p = _strip(locals())
@@ -332,6 +362,7 @@ class Bot(_BotBase):
                           is_flexible=None,
                           disable_notification=None,
                           reply_to_message_id=None,
+                          allow_sending_without_reply=None,
                           reply_markup=None):
         """ See: https://core.telegram.org/bots/api#sendinvoice """
         p = _strip(locals())
@@ -360,7 +391,8 @@ class Bot(_BotBase):
         p = _strip(locals())
         return await self._api_request('kickChatMember', _rectify(p))
 
-    async def unbanChatMember(self, chat_id, user_id):
+    async def unbanChatMember(self, chat_id, user_id,
+                              only_if_banned=None):
         """ See: https://core.telegram.org/bots/api#unbanchatmember """
         p = _strip(locals())
         return await self._api_request('unbanChatMember', _rectify(p))
@@ -376,6 +408,7 @@ class Bot(_BotBase):
         return await self._api_request('restrictChatMember', _rectify(p))
 
     async def promoteChatMember(self, chat_id, user_id,
+                                is_anonymous=None,
                                 can_change_info=None,
                                 can_post_messages=None,
                                 can_edit_messages=None,
@@ -430,8 +463,14 @@ class Bot(_BotBase):
         p = _strip(locals())
         return await self._api_request('pinChatMessage', _rectify(p))
 
-    async def unpinChatMessage(self, chat_id):
+    async def unpinChatMessage(self, chat_id,
+                               message_id=None):
         """ See: https://core.telegram.org/bots/api#unpinchatmessage """
+        p = _strip(locals())
+        return await self._api_request('unpinChatMessage', _rectify(p))
+    
+    async def unpinAllChatMessages(self, chat_id):
+        """ See: https://core.telegram.org/bots/api#unpinallchatmessages """
         p = _strip(locals())
         return await self._api_request('unpinChatMessage', _rectify(p))
 
@@ -503,6 +542,7 @@ class Bot(_BotBase):
 
     async def editMessageText(self, msg_identifier, text,
                               parse_mode=None,
+                              entities=None,
                               disable_web_page_preview=None,
                               reply_markup=None):
         """
@@ -521,6 +561,7 @@ class Bot(_BotBase):
     async def editMessageCaption(self, msg_identifier,
                                  caption=None,
                                  parse_mode=None,
+                                 caption_entities=None,
                                  reply_markup=None):
         """
         See: https://core.telegram.org/bots/api#editmessagecaption
@@ -633,8 +674,10 @@ class Bot(_BotBase):
     async def setWebhook(self,
                          url=None,
                          certificate=None,
+                         ip_address=None,
                          max_connections=None,
-                         allowed_updates=None):
+                         allowed_updates=None,
+                         drop_pending_updates=None):
         """ See: https://core.telegram.org/bots/api#setwebhook """
         p = _strip(locals(), more=['certificate'])
 
@@ -644,7 +687,8 @@ class Bot(_BotBase):
         else:
             return await self._api_request('setWebhook', _rectify(p))
 
-    async def deleteWebhook(self):
+    async def deleteWebhook(self,
+                            drop_pending_updates=None):
         """ See: https://core.telegram.org/bots/api#deletewebhook """
         return await self._api_request('deleteWebhook')
 
