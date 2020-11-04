@@ -4,10 +4,7 @@
 ## This fork is updated to [Bot API 5.0](https://core.telegram.org/bots/api-changelog#November-4-2020).
 
 This fork provides additional features that are missing in the last telepot update.
-
-- New Bot API Methods: sendAnimation, sendDice, setChatAdministratorCustomTitle, setChatPermissions, setMyCommands, getMyCommands
-- New Content types: dice, poll
-
+There is currently no documentation for the additional methods, so please check the official [Bot API documentation](https://core.telegram.org/bots/api).
 
 ### [Introduction »](http://telepot.readthedocs.io/en/latest/)
 ### [Reference »](http://telepot.readthedocs.io/en/latest/reference.html)
