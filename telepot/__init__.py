@@ -611,7 +611,7 @@ class Bot(_BotBase):
     
     def sendAnimation(self, chat_id, animation,
                      caption=None,
-                     pasrse_mode=None,
+                     parse_mode=None,
                      caption_entities=None,
                      disable_notification=None,
                      reply_to_message_id=None,
