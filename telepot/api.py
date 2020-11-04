@@ -10,6 +10,8 @@ from . import exception, _isstring
 urllib3.disable_warnings()
 
 
+_api_server = 'https://api.telegram.org'
+
 _default_pool_params = dict(num_pools=3, maxsize=10, retries=3, timeout=30)
 _onetime_pool_params = dict(num_pools=1, maxsize=1, retries=3, timeout=30)
 
@@ -19,6 +21,9 @@ _pools = {
 
 _onetime_pool_spec = (urllib3.PoolManager, _onetime_pool_params)
 
+
+def set_api(url):
+    _api_server = url
 
 def set_proxy(url, basic_auth=None):
     """
@@ -45,7 +50,7 @@ def _create_onetime_pool():
 
 def _methodurl(req, **user_kw):
     token, method, params, files = req
-    return 'https://api.telegram.org/bot%s/%s' % (token, method)
+    return _api_server + '/bot%s/%s' % (token, method)
 
 def _which_pool(req, **user_kw):
     token, method, params, files = req
@@ -156,7 +161,7 @@ def request(req, **user_kw):
 
 def _fileurl(req):
     token, path = req
-    return 'https://api.telegram.org/file/bot%s/%s' % (token, path)
+    return _api_server + '/file/bot%s/%s' % (token, path)
 
 def download(req, **user_kw):
     pool = _create_onetime_pool()
