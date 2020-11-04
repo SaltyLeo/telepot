@@ -750,7 +750,7 @@ class Bot(_BotBase):
         """
         f = await self.getFile(file_id)
         try:
-            r = api.download((self._token, f['file_path']), preload_content=False)
+            r = api.download((self._token, f['file_path']))
             data = await r.read()
         finally:
             if 'r' in locals():
