@@ -9,6 +9,8 @@ from ..api import _methodurl, _which_pool, _fileurl, _guess_filename
 
 _loop = asyncio.get_event_loop()
 
+_api_server = 'https://api.telegram.org'
+
 _pools = {
     'default': aiohttp.ClientSession(
                    connector=aiohttp.TCPConnector(limit=10),
@@ -17,6 +19,9 @@ _pools = {
 
 _timeout = 30
 _proxy = None  # (url, (username, password))
+
+def set_api(url):
+    _api_server = url
 
 def set_proxy(url, basic_auth=None):
     global _proxy
