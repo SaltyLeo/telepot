@@ -1,5 +1,6 @@
 # telepot - Python framework for Telegram Bot API
 
+# This fork is updated to Bot API 5.0
 ## The original owner is no longer maintaining this library.
 
 This fork provides additional features that are missing in the last telepot update.
